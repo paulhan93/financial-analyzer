@@ -48,7 +48,6 @@ def main():
 
     # create a Company object
     apple = Company('aapl')
-    apple.print_dataframe()
 
 if __name__ == "__main__":
     main()
