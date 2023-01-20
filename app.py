@@ -7,23 +7,31 @@ License     : MIT license
 
 # import modules
 import sqlite3
-import numpy as np
 import pandas as pd
 from Company import Company
 
 # functions
-def connect_to_database():
+def write_to_database():
     # connect to the database
     conn = sqlite3.connect('financial_data.db')
 
+    # read the financial_data.xlsx file as a pandas dataframe
     df = pd.read_excel("financial_data.xlsx")
+
+    # write data stored in df into a table named 'aapl' in the database (financial_data.db)
     df.to_sql('aapl', conn, if_exists='replace')
+
+    # commit to save the changes and close connection to database
+    conn.commit()
+    conn.close()
+
+def print_table_from_database(table: str):
+    # connect to the database
+    conn = sqlite3.connect('financial_data.db')
 
     # create a cursor object to execute SQL commands
     cursor = conn.cursor()
-    #cursor.execute('''CREATE TABLE aapl (year INTEGER PRIMARY KEY, currentAssets REAL, currentLiabilities REAL, inventory REAL)''')
-    #cursor.execute("INSERT INTO aapl (year, currentAssets, currentLiabilities, inventory) VALUES (2022, 135405, 153982, 4946)")
-    cursor.execute("SELECT * FROM aapl")
+    cursor.execute("SELECT * FROM {}".format(table))
 
     # fetch all the rows from the result of a query
     rows = cursor.fetchall()
@@ -34,16 +42,13 @@ def connect_to_database():
     conn.commit()
     conn.close()
 
-
 def main():
-    # connect to the sqlite database
-    connect_to_database()
+    # copy the table in financial_data.xlsx into financial_data.db
+    #write_to_database()
 
-    #company = Company("AAPL", 135405, 153982, 4946)
-    #print(company)
-
-    #df = pd.read_excel("financial_data.xlsx")
-    #print(df.head())
+    # create a Company object
+    apple = Company('aapl')
+    apple.print_dataframe()
 
 if __name__ == "__main__":
     main()
