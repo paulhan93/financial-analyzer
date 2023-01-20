@@ -1,9 +1,29 @@
-# Company Class File 
+import sqlite3
+import pandas as pd
 
 class Company:
-    def __init__(self):
-        # constructor, initialize class variables
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.df = self.read_sql()
+
+    def read_sql(self) -> pd.DataFrame:
+        # connect to the database
+        conn = sqlite3.connect('financial_data.db')
+
+        # define the SQL query
+        query = 'SELECT * FROM {}'.format(self.name)
+        
+        # read the data into a dataframe
+        df = pd.read_sql(query, conn)
+
+        # commit to save the changes and close connection to database
+        conn.commit()
+        conn.close()
+
+        return df
+
+    def print_dataframe(self):
+        print(self.df)
 
     def current_ratio(self):
         """
