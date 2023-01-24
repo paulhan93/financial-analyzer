@@ -66,112 +66,24 @@ class Company:
         return ps_ratio
 
     def get_earnings_yield(self):
-        """Return the Earnings Yield Ratio."""
+        """Return the Earnings Yield."""
         pe_ratio = self.company.get_pe_ratio()
         earnings_yield = (pe_ratio**-1)*100
         return earnings_yield
 
-    
+    def get_ev_to_ebitda(self):
+        """Return the Enterprise-to-EBITDA (Earnings before interest, taxes, depreciation, 
+        and amortization) Ratio."""
+        key_data = self.company.get_key_statistics_data()
+        ev_to_ebitda = key_data[self.name]['enterpriseToEbitda']
+        return ev_to_ebitda
 
-    
-    def calculate_current_ratio(self) -> pd.DataFrame:
-        """
-        Calculate the current ratio; current assets / current liabilities \n
-        Current ratio is a measure of a company's ability to meet short-term obligations. 
-        A ratio of 1 or higher is generally considered healthy.
-        """
-        x = self.df['Year']
-        y = self.df['Current Assets'] / self.df['Current Liabilities']
-        df = pd.DataFrame({'Year': x, 'Current Ratio': y})
+    def get_fcf_yield(self):
+        """Return the Free-Cash-Flow Yield."""
+        financial_data = self.company.get_financial_data()
+        free_cash_flow = financial_data[self.name]['freeCashflow']
+        market_cap = self.company.get_market_cap()
+        fcf_yield = (free_cash_flow/market_cap)*100
+        return fcf_yield
 
-        # plot
-        sns.lineplot(data=df, x='Year', y='Current Ratio')
-        plt.show()
-
-        return df
         
-    def calculate_quick_ratio(self) -> pd.DataFrame:
-        """
-        Calculate the quick ratio; (current assets - inventory) / current liabilities \n
-        Quick ratio is considered to be a more conservative measure of a company's liquidity 
-        than the current ratio. A ratio of 1 or higher is generally considered healthy.
-        """
-        x = self.df['Year']
-        y = (self.df['Current Assets']-self.df['Inventory']) / self.df['Current Liabilities']
-        df = pd.DataFrame({'Year': x, 'Quick Ratio': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='Quick Ratio')
-        plt.show()
-
-        return df
-
-    def calculate_gross_profit_margin(self) -> pd.DataFrame:
-        """
-        Calculate the gross profit margin
-        """
-        x = self.df['Year']
-        y = (self.df['Revenue']-self.df['COGS']) / self.df['Revenue']
-        df = pd.DataFrame({'Year': x, 'Gross Profit Margin': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='Gross Profit Margin')
-        plt.show()
-
-        return df
-
-    def calculate_net_profit_margin(self) -> pd.DataFrame:
-        """
-        Calculate the net profit margin
-        """
-        x = self.df['Year']
-        y = (self.df['Revenue']-self.df['Expenses']) / self.df['Revenue']
-        df = pd.DataFrame({'Year': x, 'Net Profit Margin': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='Net Profit Margin')
-        plt.show()
-
-        return df
-
-    def calculate_roa(self) -> pd.DataFrame:
-        """
-        Calculate the return on assets
-        """
-        x = self.df['Year']
-        y = (self.df['Revenue']-self.df['Expenses']) / self.df['Total Assets']
-        df = pd.DataFrame({'Year': x, 'ROA': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='ROA')
-        plt.show()
-
-        return df
-
-    def calculate_roe(self) -> pd.DataFrame:
-        """
-        Calculate the return on equity
-        """
-        x = self.df['Year']
-        y = (self.df['Revenue']-self.df['Expenses']) / self.df['Shareholder\'s Equity']
-        df = pd.DataFrame({'Year': x, 'ROE': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='ROE')
-        plt.show()
-
-        return df
-
-    def calculate_eps(self) -> pd.DataFrame:
-        """
-        Calculate the earnings per share
-        """
-        x = self.df['Year']
-        y = self.df['EPS']
-        df = pd.DataFrame({'Year': x, 'EPS': y})
-
-        # plot
-        sns.lineplot(data=df, x='Year', y='EPS')
-        plt.show()
-
-        return df
