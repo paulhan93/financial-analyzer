@@ -45,17 +45,15 @@ def print_table_from_database(table: str):
     conn.close()
 
 def main():
-    # copy the table in financial_data.xlsx into financial_data.db
-    #write_to_database()
+    # my investments
+    # tickers = ['SPY', 'SPGP', 'GOOGL', 'MSFT', 'META', 'AAPL', 'TSLA', 'KO', 'INTC', 'HOOD', 'F', 'GM', 'NFLX', 'AMZN', 'RBLX', 'DIS', 'COTY', 'RF']
+
+    # prompt user
+    ticker = input("Enter ticker: ").upper()
 
     # create a Company object
-    #apple = Company('aapl')
-
-    #tickers = ['AAPL', 'GOOG', 'C']
-    tickers = 'AAPL'
-    yahoo_financials = YahooFinancials(tickers, concurrent=True, max_workers=8, country="US")
-    balance_sheet_data = yahoo_financials.get_financial_stmts('quarterly', 'balance')
-    print(balance_sheet_data)
+    company = Company(ticker)
+    
     
 
 if __name__ == "__main__":
