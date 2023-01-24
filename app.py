@@ -7,7 +7,9 @@ License     : MIT license
 
 # import modules
 import sqlite3
+import numpy as np
 import pandas as pd
+from yahoofinancials import YahooFinancials
 from Company import Company
 
 # functions
@@ -47,7 +49,14 @@ def main():
     #write_to_database()
 
     # create a Company object
-    apple = Company('aapl')
+    #apple = Company('aapl')
+
+    #tickers = ['AAPL', 'GOOG', 'C']
+    tickers = 'AAPL'
+    yahoo_financials = YahooFinancials(tickers, concurrent=True, max_workers=8, country="US")
+    balance_sheet_data = yahoo_financials.get_financial_stmts('quarterly', 'balance')
+    print(balance_sheet_data)
+    
 
 if __name__ == "__main__":
     main()
