@@ -9,8 +9,11 @@ License     : MIT license
 import sqlite3
 import numpy as np
 import pandas as pd
+import pdb
 from yahoofinancials import YahooFinancials
 from Company import Company
+
+#pdb.set_trace()
 
 # functions
 def write_to_database():
@@ -53,8 +56,15 @@ def main():
 
     # create a Company object
     company = Company(ticker)
-    
-    
+
+    # Valuation Ratios
+    print(f"PE RATIO: {company.get_pe_ratio()}")
+    print(f"PB RATIO: {company.get_pb_ratio()}")
+    print(f"PS RATIO: {company.get_ps_ratio()}")
+    print(f"EARNINGS YILED: {company.get_earnings_yield()}")
+    print(f"EV-TO-EBITDA RATIO: {company.get_ev_to_ebitda()}")
+    print(f"FCF YIELD: {company.get_fcf_yield()}")
+
 
 if __name__ == "__main__":
     main()

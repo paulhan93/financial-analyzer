@@ -46,6 +46,7 @@ class Company:
         # Show the plot
         plt.show()
 
+    ## The following methods are VALUATION RATIOS
     def get_pe_ratio(self):
         """Return the Price-to-Earnings (P/E) Ratio."""
         pe_ratio = self.company.get_pe_ratio()
@@ -86,4 +87,44 @@ class Company:
         fcf_yield = (free_cash_flow/market_cap)*100
         return fcf_yield
 
-        
+
+    ## The following methods are PROFITABILITY RATIOS
+    def get_roe(self):
+        """Return the Return on Equity."""
+        financial_data = self.company.get_financial_data()
+        return_on_equity = financial_data[self.name]['returnOnEquity']*100
+        return return_on_equity
+
+    def get_roa(self):
+        """Return the Return on Assets."""
+        financial_data = self.company.get_financial_data()
+        return_on_assets = financial_data[self.name]['returnOnAssets']*100
+        return return_on_assets
+
+    # work in progress -- need to think about how to read in data with minimal hardcoding
+    def get_roce(self):
+        """Return the Return on Capital Employed."""
+        ebit = self.company.get_ebit()
+        balance_sheet = self.company.get_financial_stmts('annual', 'balance')
+        #total_assets = balance_sheet[]
+        #current_liabilities = balance_sheet[]
+        #return_on_capital_employed = ebit/(total_assets-current_liabilities)
+        #return return_on_capital_employed
+
+
+    ## The following methods are SOLVENCY RATIOS
+    #def get_debt_to_equity(self):
+    #"""Return the Debt-to-Equity Ratio."""
+    #de_ratio = total_liabilities/equity
+    #return de_ratio
+
+    ## The following methods are LIQUIDITY RATIOS
+    #def get_current_ratio(self):
+    #"""Return the Current Ratio."""
+    #current_ratio = current_assets/current_liabilities
+    #return current_ratio
+
+    #def get_quick_ratio(self):
+    #"""Return the Quick Ratio."""
+    #quick_ratio = (current_assets-inventory)/current_liabilities
+    #return quick_ratio
