@@ -64,6 +64,8 @@ def main():
     print(f"EARNINGS YILED: {company.get_earnings_yield()}")
     print(f"EV-TO-EBITDA RATIO: {company.get_ev_to_ebitda()}")
     print(f"FCF YIELD: {company.get_fcf_yield()}")
+    print(f"ROE: {company.get_roe()}")
+    print(f"ROA: {company.get_roa()}")
 
 
 if __name__ == "__main__":
