@@ -30,4 +30,4 @@ six==1.16.0
 soupsieve==2.3.2.post1
 tomli==2.0.1
 urllib3==1.26.14
-yahoofinancials==1.10
+yahoofinancials==1.11

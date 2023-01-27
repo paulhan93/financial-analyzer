@@ -66,6 +66,7 @@ def main():
     print(f"FCF YIELD: {company.get_fcf_yield()}")
     print(f"ROE: {company.get_roe()}")
     print(f"ROA: {company.get_roa()}")
+    print(f"ROCE: {company.get_roce()}")
 
 
 if __name__ == "__main__":

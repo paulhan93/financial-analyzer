@@ -101,15 +101,21 @@ class Company:
         return_on_assets = financial_data[self.name]['returnOnAssets']*100
         return return_on_assets
 
-    # work in progress -- need to think about how to read in data with minimal hardcoding
     def get_roce(self):
         """Return the Return on Capital Employed."""
         ebit = self.company.get_ebit()
-        balance_sheet = self.company.get_financial_stmts('annual', 'balance')
-        #total_assets = balance_sheet[]
-        #current_liabilities = balance_sheet[]
-        #return_on_capital_employed = ebit/(total_assets-current_liabilities)
-        #return return_on_capital_employed
+        balance_sheet = self.company.get_financial_stmts('quarterly', 'balance')
+
+        a = list(balance_sheet)[0]
+        b = list(balance_sheet[a])[0]
+        c = list(balance_sheet[a][b])[0]
+        d = list(c)[0]
+        balance_sheet = c[d]
+
+        total_assets = balance_sheet['totalAssets']
+        current_liabilities = balance_sheet['totalCurrentLiabilities']
+        return_on_capital_employed = ebit/(total_assets-current_liabilities)*100
+        return return_on_capital_employed
 
 
     ## The following methods are SOLVENCY RATIOS
