@@ -1,4 +1,5 @@
 import sqlite3
+import pdb
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -83,6 +84,8 @@ class Company:
         """Return the Free-Cash-Flow Yield."""
         financial_data = self.company.get_financial_data()
         free_cash_flow = financial_data[self.name]['freeCashflow']
+        if type(free_cash_flow) != int:
+            free_cash_flow = 0
         market_cap = self.company.get_market_cap()
         fcf_yield = (free_cash_flow/market_cap)*100
         return fcf_yield

@@ -7,6 +7,10 @@ Welcome to the Financial Statement Analyzer App! This app is designed to help us
 - Python 3.x
 - Pandas
 - NumPy
+- yahoofinancials
+
+Make sure yahoofinancials is up to date. You can check here :
+`https://pypi.org/project/yahoofinancials/`
 
 ## Installation
 
